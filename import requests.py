@@ -112,9 +112,11 @@ def get_data(variables: dict):
 
     df = pd.DataFrame(data=table_data, columns=["Date", "Team", "Acquired", "Relinquished", "Notes"])
     df = df.replace(r'^\s*$', np.nan, regex=True)
+    df = df.replace(r'^•\s*', "", regex=True)
     return df
 
 df = get_data(variables=variables)
-print(df.head(100))
+df = df[~df['Notes'].str.contains('activated', case=False, na=False)]
+print(df["Notes"].drop_duplicates())
 
 # # df = generate_calendar(variables=variables)
