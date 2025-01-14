@@ -1,17 +1,29 @@
 
 -- Create table for season calendar dates
-DROP TABLE IF EXISTS season_calendar;
+DROP TABLE IF EXISTS dim_season_calendar;
+DROP TABLE IF EXISTS raw_injured_reserve;
 DROP TABLE IF EXISTS raw_injuries;
 
-CREATE TABLE season_calendar
+CREATE TABLE dim_season_calendar
 (
-    year INTEGER
+    season INTEGER
     , week_number INTEGER
     , report_date DATE
     , week_start_date DATE
     , week_end_date DATE
 )
 ;
+
+CREATE TABLE IF NOT EXISTS raw_injured_reserve
+(
+date_added DATE
+, season INTEGER
+, report_date DATE
+, team TEXT
+, acquired TEXT
+, relinquished TEXT
+, notes TEXT
+);
 
 CREATE TABLE IF NOT EXISTS raw_injuries
 (

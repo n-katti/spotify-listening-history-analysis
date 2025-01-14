@@ -1,0 +1,1 @@
+Does not include players who were questionable up to their game and did not play, as the injury report marks them Questionable and therefore not missing a game. Would need to tie to some statistic data source to see if they ended up playing, but that is not within scope currently.

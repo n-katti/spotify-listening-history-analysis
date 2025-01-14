@@ -5,6 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import numpy as np
+import traceback
 
 def generate_calendar(variables: dict):
     '''

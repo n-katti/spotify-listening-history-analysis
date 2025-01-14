@@ -1,5 +1,31 @@
 import pandas as pd
 from datetime import datetime, timedelta
+import logging
+import os
+import traceback
+
+# Determine the log file directory and ensure it exists
+script_dir = os.path.dirname(os.path.abspath(__file__))  
+log_dir = os.path.join(script_dir, "../logging")         
+os.makedirs(log_dir, exist_ok=True)                     
+
+log_file_path = os.path.join(log_dir, "errors.log")
+
+# Configure logging
+logging.basicConfig(
+    filename=log_file_path,
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+
+def log_error(exception, context=None):
+    """Logs an exception, its traceback, and optional context."""
+    logging.error(f"Error: {exception}")
+    if context:
+        logging.error(f"Context: {context}")
+    logging.error("Traceback:", exc_info=True)
+
 
 def convert_to_date(date_string):
     if isinstance(date_string, datetime):
@@ -32,7 +58,7 @@ def generate_calendar(date_dict: dict):
             while current_date <= current_week_end_date:
             # Append week data to the list
                 weeks_data.append({
-                    "year": year,
+                    "season": year,
                     "week_number": week_num,
                     "report_date" : current_date,
                     "week_start_date": current_week_start_date, 
